@@ -83,7 +83,7 @@ namespace SimpleChatAPI
 				MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
-
+			
 			// Process API response
 			string responseContent;
 			if(response.IsSuccessStatusCode)
@@ -102,8 +102,11 @@ namespace SimpleChatAPI
 			try
 			{
 				dynamic jsonResponse = JsonConvert.DeserializeObject(responseContent);
-				string messageContent = jsonResponse.choices[0].message.content;
-				resultbox.Text = messageContent;
+				if(checkResponse(jsonResponse))
+				{
+					string messageContent = jsonResponse.choices[0].message.content;
+					resultbox.Text = messageContent;
+				}
 			}
 			catch(JsonException ex)
 			{
@@ -111,6 +114,26 @@ namespace SimpleChatAPI
 				MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
+
+		}
+
+		bool checkResponse(dynamic response)
+		{
+			if(response.choices == null || response.choices.Count == 0)
+			{
+				string errorMessage = "API response did not contain any choices.";
+				MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return false;
+			}
+
+			// Check if the first choice contains a message
+			if(response.choices[0].message == null || response.choices[0].message.content == null)
+			{
+				string errorMessage = "API response did not contain a valid message.";
+				MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return false;
+			}
+			return true;
 		}
 
 		private async void button1_Click(object sender, EventArgs e)
@@ -246,19 +269,23 @@ namespace SimpleChatAPI
 			try
 			{
 				dynamic jsonResponse = JsonConvert.DeserializeObject(responseContent);
-				string messageContent = jsonResponse.choices[0].message.content;
-				//screenbox.Text = messageContent;
-				string[] items = messageContent.Split(new string[] { " - ", "\n" }, StringSplitOptions.RemoveEmptyEntries);
 
-				foreach(string item in items)
+				if(checkResponse(jsonResponse))
 				{
-					// perform any necessary processing on each item
-					string processedItem = item.Trim();
+					string messageContent = jsonResponse.choices[0].message.content;
+					//screenbox.Text = messageContent;
+					string[] items = messageContent.Split(new string[] { " - ", "\n" }, StringSplitOptions.RemoveEmptyEntries);
 
-					// add each item to the ListBox
-					mysterylistbox.Items.Add(processedItem);
+					foreach(string item in items)
+					{
+						// perform any necessary processing on each item
+						string processedItem = item.Trim();
+
+						// add each item to the ListBox
+						mysterylistbox.Items.Add(processedItem);
+					}
+					runbutton.Visible = true;
 				}
-				runbutton.Visible = true;
 			}
 			catch(JsonException ex)
 			{
@@ -352,9 +379,11 @@ namespace SimpleChatAPI
 			try
 			{
 				dynamic jsonResponse = JsonConvert.DeserializeObject(responseContent);
-				string messageContent = jsonResponse.choices[0].message.content;
-				screenbox.Text = messageContent;
-
+				if(checkResponse(jsonResponse))
+				{
+					string messageContent = jsonResponse.choices[0].message.content;
+					screenbox.Text = messageContent;
+				}
 			}
 			catch(JsonException ex)
 			{
