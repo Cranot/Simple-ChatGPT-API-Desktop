@@ -6,7 +6,8 @@ The only thing you want is OpenAI API. This is working way faster than free Chat
 You need to spend more than 10millions Tokens to surpass the 20$ subscription.
 
 ## How to use
-1) You can either download a ready compiled version from "releases" folder, or you can compile it your self. (requirements .Net-4.7.2)
+Download ![v0.3 fixed](https://github.com/Cranot/Simple-ChatGPT-API-Desktop/raw/main/files/Windows-v0.3.zip)
+1) You can either download a ready compiled version from "files" folder, or you can compile it your self. (requirements .Net-4.7.2)
 2) Write your API and your Prompt.
 3) Now you can hit "Generate" or "Magic"
 
