@@ -233,6 +233,8 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.AutoScroll = true;
+			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.ClientSize = new System.Drawing.Size(1323, 672);
 			this.Controls.Add(this.linkLabel2);
 			this.Controls.Add(this.label5);
@@ -253,9 +255,11 @@
 			this.Controls.Add(this.button1);
 			this.Controls.Add(this.apibox);
 			this.Controls.Add(this.label1);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "SimpleChatGPT";
-			this.ShowInTaskbar = false;
+			this.Opacity = 0.96D;
+			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
 			this.Text = "Simple ChatGPT API";
 			this.Load += new System.EventHandler(this.chatapiapp_Load);
 			this.ResumeLayout(false);
