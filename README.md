@@ -19,6 +19,7 @@ This will generate some smart prompt options generated on a ListBox.
 You can select any suggested prompt from the list and then just click "Run this".
 
 ## Limitations
+* You need your own OpenAI key and Windows
 * The app is not robust yet, so you may encounter some errors.
 * The curl commands are not complex, if you want more options you can edit code to add more parameters.
 
