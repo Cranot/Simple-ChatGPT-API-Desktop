@@ -240,8 +240,8 @@ namespace SimpleChatAPI
 				return;
 
 			string prompt = cleanprompt(promptbox.Text);
-
-			prompt = $"'{prompt}' - 10 distinct, concise prompts starting with '-' to aid understanding.";
+			
+			prompt = $"From '{prompt}', create 10 distinct hyphenated prompts that offer valuable information or insights. No need for categories - the prompts should be diverse and relevant to the text.";
 			string response = await GetResponse(prompt, "-");
 			if(response == null)
 				return;
@@ -348,7 +348,7 @@ namespace SimpleChatAPI
 				if(checkResponse(jsonResponse))
 				{
 					string messageContent = jsonResponse.choices[0].message.content;
-					resultbox.Text = messageContent;
+					screenbox.Text = messageContent;
 				}
 			}
 			catch(JsonException ex)
